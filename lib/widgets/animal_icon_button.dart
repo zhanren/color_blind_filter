@@ -32,17 +32,29 @@ class AnimalIconButton extends StatelessWidget {
           width: AppSpacing.touchTarget,
           height: AppSpacing.touchTarget,
           decoration: BoxDecoration(
-            color: AppColors.cameraOverlay,
+            color: Colors.white,
             shape: BoxShape.circle,
             border: Border.all(
               color: AppColors.badge.withAlpha(128),
               width: 1.5,
             ),
           ),
-          child: Center(
-            child: Text(
-              animalInfo.emoji,
-              style: const TextStyle(fontSize: 24),
+          child: ClipOval(
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: Image.asset(
+                animalInfo.imagePath,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  // Fallback to emoji if image not found
+                  return Center(
+                    child: Text(
+                      animalInfo.emoji,
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

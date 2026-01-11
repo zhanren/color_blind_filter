@@ -6,6 +6,7 @@ import 'screens/camera_screen.dart';
 import 'screens/permission_screen.dart';
 import 'screens/review_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/splash_screen.dart';
 import 'theme/app_theme.dart';
 import 'utils/settings_service.dart';
 
@@ -20,30 +21,45 @@ class ColorBlindFilterApp extends StatefulWidget {
 class _ColorBlindFilterAppState extends State<ColorBlindFilterApp> {
   Locale _locale = const Locale('en');
   bool _isLoading = true;
+  bool _showSplash = false;
 
   @override
   void initState() {
     super.initState();
-    _loadLocale();
+    _initializeApp();
   }
 
-  Future<void> _loadLocale() async {
+  Future<void> _initializeApp() async {
     try {
+      // Load locale
       final locale = await SettingsService.getLocale();
+      
       if (mounted) {
         setState(() {
           _locale = locale;
+          _showSplash = true; // Always show splash screen
           _isLoading = false;
         });
       }
     } catch (e) {
+      debugPrint('Error initializing app: $e');
       // Fallback to English if loading fails
       if (mounted) {
         setState(() {
           _locale = const Locale('en');
+          _showSplash = true; // Always show splash screen
           _isLoading = false;
         });
       }
+    }
+  }
+
+  Future<void> _onSplashComplete() async {
+    // Navigate away from splash screen
+    if (mounted) {
+      setState(() {
+        _showSplash = false;
+      });
     }
   }
 
@@ -65,7 +81,11 @@ class _ColorBlindFilterAppState extends State<ColorBlindFilterApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: _isLoading ? _buildLoadingScreen() : const PermissionScreen(),
+      home: _isLoading
+          ? _buildLoadingScreen()
+          : _showSplash
+              ? SplashScreen(onComplete: _onSplashComplete)
+              : const PermissionScreen(),
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/':
@@ -95,11 +115,14 @@ class _ColorBlindFilterAppState extends State<ColorBlindFilterApp> {
   }
 
   Widget _buildLoadingScreen() {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: CircularProgressIndicator(
-          color: Colors.white,
+        child: Image.asset(
+          'assets/icons/dog.png',
+          width: 80,
+          height: 80,
+          fit: BoxFit.contain,
         ),
       ),
     );

@@ -42,4 +42,5 @@ class SettingsService {
       return const Locale('en');
     }
   }
+
 }

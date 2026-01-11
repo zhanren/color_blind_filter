@@ -1,8 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
-
 /// Widget that displays the camera preview with an optional color filter.
 class FilteredCameraPreview extends StatelessWidget {
   const FilteredCameraPreview({
@@ -73,9 +71,12 @@ class _LoadingPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.primary,
+      child: Center(
+        child: Image.asset(
+          'assets/icons/dog.png',
+          width: 80,
+          height: 80,
+          fit: BoxFit.contain,
         ),
       ),
     );

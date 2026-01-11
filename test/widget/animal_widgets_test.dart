@@ -8,11 +8,12 @@ void main() {
   const testAnimal = AnimalInfo(
     name: 'Dog',
     emoji: '🐕',
+    imagePath: 'assets/icons/dog.png',
     fact: 'Dogs can see blue and yellow!',
   );
 
   group('AnimalIconButton', () {
-    testWidgets('renders animal emoji', (tester) async {
+    testWidgets('renders animal image or emoji fallback', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -24,7 +25,8 @@ void main() {
         ),
       );
 
-      expect(find.text('🐕'), findsOneWidget);
+      // Looks for Image.asset widget (or emoji fallback in test environment)
+      expect(find.byType(Image), findsOneWidget);
     });
 
     testWidgets('triggers onTap callback when pressed', (tester) async {
@@ -72,7 +74,7 @@ void main() {
   });
 
   group('AnimalInfoSheet', () {
-    testWidgets('displays animal emoji', (tester) async {
+    testWidgets('displays animal image or emoji fallback', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -81,7 +83,8 @@ void main() {
         ),
       );
 
-      expect(find.text('🐕'), findsOneWidget);
+      // Looks for Image.asset widget (or emoji fallback in test environment)
+      expect(find.byType(Image), findsOneWidget);
     });
 
     testWidgets('displays animal name', (tester) async {

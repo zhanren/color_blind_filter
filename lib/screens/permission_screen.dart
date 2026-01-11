@@ -78,11 +78,14 @@ class _PermissionScreenState extends State<PermissionScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
+      return Scaffold(
         backgroundColor: AppColors.surface,
         body: Center(
-          child: CircularProgressIndicator(
-            color: AppColors.primary,
+          child: Image.asset(
+            'assets/icons/dog.png',
+            width: 80,
+            height: 80,
+            fit: BoxFit.contain,
           ),
         ),
       );
@@ -105,7 +108,7 @@ class _PermissionScreenState extends State<PermissionScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(),
-        // Camera icon
+        // App logo (dog.png)
         Container(
           width: 120,
           height: 120,
@@ -113,10 +116,13 @@ class _PermissionScreenState extends State<PermissionScreen> {
             color: AppColors.primary.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
-          child: const Icon(
-            Icons.camera_alt_rounded,
-            size: 60,
-            color: AppColors.primary,
+          child: ClipOval(
+            child: Image.asset(
+              'assets/icons/dog.png',
+              width: 120,
+              height: 120,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.xl),
