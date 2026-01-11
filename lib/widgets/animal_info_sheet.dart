@@ -54,10 +54,21 @@ class AnimalInfoSheet extends StatelessWidget {
                 ),
               ),
 
-              // Large emoji
-              Text(
-                animalInfo.emoji,
-                style: const TextStyle(fontSize: 64),
+              // Animal image
+              ClipOval(
+                child: Image.asset(
+                  animalInfo.imagePath,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback to emoji if image not found
+                    return Text(
+                      animalInfo.emoji,
+                      style: const TextStyle(fontSize: 64),
+                    );
+                  },
+                ),
               ),
 
               const SizedBox(height: AppSpacing.md),

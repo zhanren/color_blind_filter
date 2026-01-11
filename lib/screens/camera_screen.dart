@@ -353,9 +353,12 @@ class _CameraScreenState extends State<CameraScreen>
 
   Widget _buildCameraPreview() {
     if (_isInitializing) {
-      return const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.primary,
+      return Center(
+        child: Image.asset(
+          'assets/icons/dog.png',
+          width: 80,
+          height: 80,
+          fit: BoxFit.contain,
         ),
       );
     }

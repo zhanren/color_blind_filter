@@ -8,11 +8,13 @@ void main() {
       const info = AnimalInfo(
         name: 'Test',
         emoji: '🐾',
+        imagePath: 'assets/icons/test.png',
         fact: 'Test fact',
       );
 
       expect(info.name, 'Test');
       expect(info.emoji, '🐾');
+      expect(info.imagePath, 'assets/icons/test.png');
       expect(info.fact, 'Test fact');
     });
   });
@@ -21,24 +23,28 @@ void main() {
     test('dog has correct data', () {
       expect(AnimalData.dog.name, 'Dog');
       expect(AnimalData.dog.emoji, '🐕');
+      expect(AnimalData.dog.imagePath, 'assets/icons/dog.png');
       expect(AnimalData.dog.fact, isNotEmpty);
     });
 
     test('mouse has correct data', () {
       expect(AnimalData.mouse.name, 'Mouse');
       expect(AnimalData.mouse.emoji, '🐭');
+      expect(AnimalData.mouse.imagePath, 'assets/icons/mouse.png');
       expect(AnimalData.mouse.fact, isNotEmpty);
     });
 
     test('whale has correct data', () {
       expect(AnimalData.whale.name, 'Whale');
       expect(AnimalData.whale.emoji, '🐋');
+      expect(AnimalData.whale.imagePath, 'assets/icons/whale.png');
       expect(AnimalData.whale.fact, isNotEmpty);
     });
 
     test('owl has correct data', () {
       expect(AnimalData.owl.name, 'Owl');
       expect(AnimalData.owl.emoji, '🦉');
+      expect(AnimalData.owl.imagePath, 'assets/icons/owl.png');
       expect(AnimalData.owl.fact, isNotEmpty);
     });
   });
